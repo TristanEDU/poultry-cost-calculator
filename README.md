@@ -64,14 +64,10 @@ Perfect for:
 
 ## Screenshots
 
-_Add screenshots here_
 
-Example:
-
-```md
 ![Calculator UI](./screenshots/main-ui.png)
 ![Print Worksheet](./screenshots/print-view.png)
-```
+
 
 ---
 
