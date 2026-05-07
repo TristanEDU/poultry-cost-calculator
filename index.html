@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homestead Poultry Cost Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="print-layout"></div>
+
+    <div class="container" id="app-container">
+      <header>
+        <h1>Homestead Poultry Cost Calculator</h1>
+        <p>A pre-purchase reality check. Plan your one-time startup costs and discover your ongoing grocery replacement value.</p>
+      </header>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(event, 'egg-layers')">Egg-Laying Tracker</button>
+        <button class="tab-btn" onclick="switchTab(event, 'meat-birds')">Meat Bird Tracker</button>
+      </div>
+
+      <div id="egg-layers" class="tab-content active">
+        <div class="intro-text"><strong>Note:</strong> Egg-laying chickens are a longer-term investment. They need daily care, steady housing, and ongoing feed before and after they begin laying.</div>
+
+        <div class="section-header">
+          <h2>1. One-Time Setup Costs (Sunk Costs)</h2>
+          <p>These are your "barrier to entry" costs. Hover over the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
+        </div>
+        <div id="egg-capital-container"></div>
+
+        <div class="section-header">
+          <h2>2. Recurring Consumables (Operating Costs)</h2>
+          <p>This is what it costs to keep the system running every year. Feed is usually the largest ongoing expense.</p>
+        </div>
+        <div id="egg-operating-container"></div>
+
+        <h2>3. Credits & Yield</h2>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Estimated Garden Compost Value ($/Year)</label>
+            <input type="number" id="egg-compost" value="0" step="0.01" oninput="calculateEggTotals()" />
+          </div>
+          <div class="input-group">
+            <label>Annual Egg Production (Dozens)</label>
+            <input type="number" id="egg-production" value="0" oninput="calculateEggTotals()" />
+          </div>
+        </div>
+
+        <h2>4. Time & Energy</h2>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Daily Care Time (Minutes)</label>
+            <input type="number" id="egg-daily-time" value="0" oninput="calculateEggTotals()" />
+          </div>
+        </div>
+
+        <div class="results-panel">
+          <h2>5. Reality Check Calculations</h2>
+          <div class="result-item">
+            <span>One-Time Setup Cost (Sunk Cost):</span>
+            <span id="egg-res-setup">$0.00</span>
+          </div>
+          <div class="result-item">
+            <span>Ongoing Net Cost (Per Year):</span>
+            <span id="egg-res-ongoing">$0.00</span>
+          </div>
+          <div class="result-item highlight-cash">
+            <span>Total Cash Needed Year 1 (Setup + Ongoing):</span>
+            <span id="egg-res-year1">$0.00</span>
+          </div>
+          <div class="result-item">
+            <span>Total Labor:</span>
+            <span id="egg-res-hours">0.0 hrs / Year</span>
+          </div>
+          <div class="result-item total">
+            <span>Ongoing Cost per Dozen Eggs:</span>
+            <span id="egg-res-per-dozen">$0.00</span>
+          </div>
+          <p class="disclaimer">*Cost per dozen is calculated using ONLY ongoing costs, showing your true grocery replacement value once the setup is built.</p>
+          <button class="export-btn" onclick="exportToPDF('egg')">Save as PDF Worksheet</button>
+        </div>
+      </div>
+
+      <div id="meat-birds" class="tab-content">
+        <div class="intro-text"><strong>Note:</strong> Meat chickens are raised in batches with a clearer start and finish. Track one group of birds from chick arrival to freezer.</div>
+
+        <div class="section-header">
+          <h2>1. One-Time Setup Costs (Sunk Costs)</h2>
+          <p>Gear you buy once and reuse. Hover over the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
+        </div>
+        <div id="meat-capital-container"></div>
+
+        <div class="section-header">
+          <h2>2. Recurring Consumables (Batch Costs)</h2>
+          <p>Count these costs fresh each time. Feed and processing are typically the two biggest line items.</p>
+        </div>
+        <div id="meat-operating-container"></div>
+
+        <h2>3. Credits & Yield</h2>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Estimated Garden Compost Value ($/Batch)</label>
+            <input type="number" id="meat-compost" value="0" step="0.01" oninput="calculateMeatTotals()" />
+          </div>
+          <div class="input-group">
+            <label>Total Processed Birds</label>
+            <input type="number" id="meat-birds-count" value="0" oninput="calculateMeatTotals()" />
+          </div>
+          <div class="input-group">
+            <label>Average Weight per Bird (Lbs)</label>
+            <input type="number" id="meat-avg-weight" value="0" step="0.1" oninput="calculateMeatTotals()" />
+          </div>
+        </div>
+
+        <h2>4. Time & Energy</h2>
+        <div class="input-grid">
+          <div class="input-group">
+            <label>Daily Care Time (Minutes)</label>
+            <input type="number" id="meat-daily-time" value="0" oninput="calculateMeatTotals()" />
+          </div>
+          <div class="input-group">
+            <label>Total Days in Batch</label>
+            <input type="number" id="meat-batch-days" value="0" oninput="calculateMeatTotals()" />
+          </div>
+        </div>
+
+        <div class="results-panel">
+          <h2>5. Reality Check Calculations</h2>
+          <div class="result-item">
+            <span>One-Time Setup Cost (Sunk Cost):</span>
+            <span id="meat-res-setup">$0.00</span>
+          </div>
+          <div class="result-item">
+            <span>Ongoing Net Cost (Per Batch):</span>
+            <span id="meat-res-ongoing">$0.00</span>
+          </div>
+          <div class="result-item highlight-cash">
+            <span>Total Cash Needed Batch 1 (Setup + Batch):</span>
+            <span id="meat-res-batch1">$0.00</span>
+          </div>
+          <div class="result-item">
+            <span>Total Meat Yield:</span>
+            <span id="meat-res-yield">0.0 lbs</span>
+          </div>
+          <div class="result-item">
+            <span>Total Labor:</span>
+            <span id="meat-res-hours">0.0 hrs / Batch</span>
+          </div>
+          <div class="result-item total">
+            <span>Ongoing Cost per Lb of Meat:</span>
+            <span id="meat-res-per-lb">$0.00</span>
+          </div>
+          <p class="disclaimer">*Cost per lb is calculated using ONLY batch costs, showing your true grocery replacement value for future batches.</p>
+          <button class="export-btn" onclick="exportToPDF('meat')">Save as PDF Worksheet</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
