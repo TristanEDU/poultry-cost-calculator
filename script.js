@@ -29,6 +29,7 @@ const meatOperatingItems = [
 ];
 
 // --- Generation Functions ---
+// Note: We now use the modern HTML popover API and inputmode="decimal"
 function generateCapitalHtml(items, prefix, callback) {
   return items
     .map(
@@ -36,11 +37,12 @@ function generateCapitalHtml(items, prefix, callback) {
         <div class="calc-row">
             <div class="row-label">
                 ${item.name}
-                <span class="tooltip">ⓘ<span class="tooltip-text">${item.tooltip}</span></span>
+                <button type="button" class="info-btn" popovertarget="${item.id}-pop">ⓘ</button>
+                <div popover id="${item.id}-pop" class="tooltip-popover">${item.tooltip}</div>
             </div>
             <div class="input-group">
                 <label>Estimated Cost ($)</label>
-                <input type="number" id="${item.id}-cost" value="0" min="0" step="0.01" oninput="${callback}()">
+                <input type="number" id="${item.id}-cost" value="0" min="0" step="0.01" inputmode="decimal" onfocus="this.select()" oninput="${callback}()">
             </div>
         </div>
     `,
@@ -56,11 +58,11 @@ function generateOperatingHtml(items, prefix, callback) {
             <div class="row-label">${item.name}</div>
             <div class="input-group">
                 <label>Quantity</label>
-                <input type="number" id="${item.id}-qty" value="0" min="0" oninput="${callback}()">
+                <input type="number" id="${item.id}-qty" value="0" min="0" inputmode="decimal" onfocus="this.select()" oninput="${callback}()">
             </div>
             <div class="input-group">
                 <label>Price Per Unit ($)</label>
-                <input type="number" id="${item.id}-price" value="0" min="0" step="0.01" oninput="${callback}()">
+                <input type="number" id="${item.id}-price" value="0" min="0" step="0.01" inputmode="decimal" onfocus="this.select()" oninput="${callback}()">
             </div>
         </div>
     `,
@@ -179,11 +181,9 @@ function exportToPDF(type) {
   const unit = isEgg ? "Dozen" : "Lb";
   const timeUnit = isEgg ? "Year 1" : "Batch 1";
 
-  // Arrays for looping through inputs
   const capitalItems = isEgg ? eggCapitalItems : meatCapitalItems;
   const operatingItems = isEgg ? eggOperatingItems : meatOperatingItems;
 
-  // Generate Capital Table Rows
   let capitalRowsHTML = "";
   capitalItems.forEach((item) => {
     let cost = parseFloat(document.getElementById(`${item.id}-cost`).value) || 0;
@@ -196,7 +196,6 @@ function exportToPDF(type) {
         `;
   });
 
-  // Generate Operating Table Rows
   let operatingRowsHTML = "";
   operatingItems.forEach((item) => {
     let qty = parseFloat(document.getElementById(`${item.id}-qty`).value) || 0;
@@ -254,7 +253,7 @@ function exportToPDF(type) {
                         ${operatingRowsHTML}
                         <tr class="total-row">
                             <td>Total Operating Estimate</td>
-                            <td>${formatMoney(data.ongoing + parseFloat(document.getElementById(isEgg ? "egg-compost" : "meat-compost").value) || 0)}</td>
+                            <td>${formatMoney(data.ongoing + (parseFloat(document.getElementById(isEgg ? "egg-compost" : "meat-compost").value) || 0))}</td>
                             <td class="blank-cell"></td>
                         </tr>
                     </tbody>
@@ -267,7 +266,7 @@ function exportToPDF(type) {
                     <span>Total Cash Needed Estimate (${timeUnit})</span>
                     <span>${formatMoney(data.year1)}</span>
                 </div>
-                <div class="print-row">
+                <div class=\"print-row\">
                     <span>Expected Yield</span>
                     <span>${data.yield.toFixed(1)} ${isEgg ? "Dozens" : "Lbs"}</span>
                 </div>

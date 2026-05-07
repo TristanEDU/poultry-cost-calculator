@@ -13,20 +13,24 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   margin: 0;
-  padding: 20px;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
+  padding: 20px;
 }
+
 header {
   text-align: center;
   margin-bottom: 30px;
 }
+
 h1 {
   color: var(--primary);
   margin-bottom: 5px;
+  line-height: 1.2;
 }
 
 /* Tabs */
@@ -34,19 +38,25 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows tabs to sit nicely on tiny screens */
 }
+
 .tab-btn {
   background-color: #e0e0e0;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 24px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px 8px 0 0;
-  margin: 0 5px;
+  margin: 0 4px;
   font-weight: bold;
   color: #555;
   transition: background 0.3s;
+  min-height: 48px; /* Ideal touch target size */
+  flex: 1;
+  max-width: 250px;
 }
+
 .tab-btn.active {
   background-color: var(--primary);
   color: white;
@@ -57,54 +67,52 @@ h1 {
   background: var(--card-bg);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly elevated modern shadow */
 }
+
 .tab-content.active {
   display: block;
 }
 
-/* Tooltips */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: help;
+/* Cutting-Edge Popover Tooltips */
+.info-btn {
+  background: none;
+  border: none;
   color: var(--secondary);
-  margin-left: 6px;
-  font-size: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 8px;
+  margin-left: 4px;
+  border-radius: 50%;
 }
-.tooltip .tooltip-text {
-  visibility: hidden;
-  width: 260px;
+
+.tooltip-popover {
   background-color: #333;
   color: #fff;
-  text-align: left;
-  border-radius: 6px;
-  padding: 10px;
-  position: absolute;
-  z-index: 10;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 13px;
-  font-weight: normal;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  max-width: 300px;
   line-height: 1.4;
+  margin: auto; /* Centers popover natively */
 }
-.tooltip .tooltip-text::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
+
+/* Adds a smooth fade-in for browsers that support it */
+.tooltip-popover:popover-open {
+  animation: fadeIn 0.2s ease-out;
 }
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Typography & Layouts */
@@ -116,16 +124,19 @@ h1 {
   margin-bottom: 25px;
   font-size: 15px;
 }
+
 .section-header h2 {
   margin-bottom: 0;
   border-bottom: none;
 }
+
 .section-header p {
   font-size: 14px;
   color: #666;
   margin-top: 5px;
   margin-bottom: 15px;
 }
+
 h2 {
   color: var(--secondary);
   margin-top: 30px;
@@ -140,26 +151,33 @@ h2 {
   gap: 15px;
   margin-bottom: 20px;
 }
+
 .input-group {
   display: flex;
   flex-direction: column;
 }
+
 label {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #555;
 }
+
 input[type="number"] {
-  padding: 10px;
+  padding: 12px; /* Taller input for touch */
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 6px;
+  font-size: 16px; /* 16px MINIMUM prevents iOS Safari Auto-Zooming */
+  min-height: 44px;
+  background-color: #fcfcfc;
 }
+
 input[type="number"]:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(74, 93, 35, 0.2);
+  box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.2);
+  background-color: #fff;
 }
 
 .calc-row {
@@ -168,16 +186,20 @@ input[type="number"]:focus {
   gap: 15px;
   margin-bottom: 10px;
   background: #fdfdfd;
-  padding: 10px 15px;
+  padding: 15px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
 }
+
 .calc-row > div {
   flex: 1;
 }
+
 .calc-row .row-label {
   flex: 2;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
 /* Results */
@@ -188,11 +210,13 @@ input[type="number"]:focus {
   border-radius: 8px;
   margin-top: 30px;
 }
+
 .results-panel h2 {
   margin-top: 0;
   color: var(--primary);
   border: none;
 }
+
 .result-item {
   display: flex;
   justify-content: space-between;
@@ -201,16 +225,18 @@ input[type="number"]:focus {
   padding-bottom: 10px;
   border-bottom: 1px dashed #ccc;
 }
+
 .result-item.highlight-cash {
   color: #8b0000;
   font-size: 18px;
   font-weight: bold;
   background: #fff;
   padding: 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   margin-bottom: 15px;
 }
+
 .result-item.total {
   font-size: 20px;
   font-weight: bold;
@@ -218,6 +244,7 @@ input[type="number"]:focus {
   border-bottom: none;
   margin-top: 15px;
 }
+
 .disclaimer {
   font-size: 12px;
   color: #666;
@@ -227,12 +254,12 @@ input[type="number"]:focus {
   text-align: right;
 }
 
-/* Export */
+/* Export Button */
 .export-btn {
   background-color: var(--secondary);
   color: white;
-  padding: 12px 24px;
-  border-radius: 4px;
+  padding: 14px 24px;
+  border-radius: 6px;
   cursor: pointer;
   border: none;
   font-weight: bold;
@@ -240,10 +267,43 @@ input[type="number"]:focus {
   width: 100%;
   font-size: 16px;
   margin-top: 10px;
-  transition: 0.2s;
+  transition: background 0.2s;
+  min-height: 48px;
 }
+
 .export-btn:hover {
   background-color: #6a4421;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE TWEAKS 
+   ========================================= */
+@media (max-width: 650px) {
+  .calc-row {
+    flex-direction: column; /* Stack the columns vertically on phones */
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .calc-row .row-label {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+
+  .tab-content {
+    padding: 20px 15px; /* Less padding on small screens */
+  }
+
+  .result-item {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .result-item span:last-child {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
 }
 
 /* =========================================

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Homestead Poultry Cost Calculator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -25,7 +25,7 @@
 
         <div class="section-header">
           <h2>1. One-Time Setup Costs (Sunk Costs)</h2>
-          <p>These are your "barrier to entry" costs. Hover over the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
+          <p>These are your "barrier to entry" costs. Tap the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
         </div>
         <div id="egg-capital-container"></div>
 
@@ -39,11 +39,11 @@
         <div class="input-grid">
           <div class="input-group">
             <label>Estimated Garden Compost Value ($/Year)</label>
-            <input type="number" id="egg-compost" value="0" step="0.01" oninput="calculateEggTotals()" />
+            <input type="number" id="egg-compost" value="0" step="0.01" inputmode="decimal" onfocus="this.select()" oninput="calculateEggTotals()" />
           </div>
           <div class="input-group">
             <label>Annual Egg Production (Dozens)</label>
-            <input type="number" id="egg-production" value="0" oninput="calculateEggTotals()" />
+            <input type="number" id="egg-production" value="0" inputmode="decimal" onfocus="this.select()" oninput="calculateEggTotals()" />
           </div>
         </div>
 
@@ -51,7 +51,7 @@
         <div class="input-grid">
           <div class="input-group">
             <label>Daily Care Time (Minutes)</label>
-            <input type="number" id="egg-daily-time" value="0" oninput="calculateEggTotals()" />
+            <input type="number" id="egg-daily-time" value="0" inputmode="decimal" onfocus="this.select()" oninput="calculateEggTotals()" />
           </div>
         </div>
 
@@ -66,7 +66,7 @@
             <span id="egg-res-ongoing">$0.00</span>
           </div>
           <div class="result-item highlight-cash">
-            <span>Total Cash Needed Year 1 (Setup + Ongoing):</span>
+            <span>Total Cash Needed Year 1:</span>
             <span id="egg-res-year1">$0.00</span>
           </div>
           <div class="result-item">
@@ -74,7 +74,7 @@
             <span id="egg-res-hours">0.0 hrs / Year</span>
           </div>
           <div class="result-item total">
-            <span>Ongoing Cost per Dozen Eggs:</span>
+            <span>Ongoing Cost per Dozen:</span>
             <span id="egg-res-per-dozen">$0.00</span>
           </div>
           <p class="disclaimer">*Cost per dozen is calculated using ONLY ongoing costs, showing your true grocery replacement value once the setup is built.</p>
@@ -87,7 +87,7 @@
 
         <div class="section-header">
           <h2>1. One-Time Setup Costs (Sunk Costs)</h2>
-          <p>Gear you buy once and reuse. Hover over the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
+          <p>Gear you buy once and reuse. Tap the ⓘ icons for estimates on DIY vs. Retail pricing.</p>
         </div>
         <div id="meat-capital-container"></div>
 
@@ -101,15 +101,15 @@
         <div class="input-grid">
           <div class="input-group">
             <label>Estimated Garden Compost Value ($/Batch)</label>
-            <input type="number" id="meat-compost" value="0" step="0.01" oninput="calculateMeatTotals()" />
+            <input type="number" id="meat-compost" value="0" step="0.01" inputmode="decimal" onfocus="this.select()" oninput="calculateMeatTotals()" />
           </div>
           <div class="input-group">
             <label>Total Processed Birds</label>
-            <input type="number" id="meat-birds-count" value="0" oninput="calculateMeatTotals()" />
+            <input type="number" id="meat-birds-count" value="0" inputmode="decimal" onfocus="this.select()" oninput="calculateMeatTotals()" />
           </div>
           <div class="input-group">
             <label>Average Weight per Bird (Lbs)</label>
-            <input type="number" id="meat-avg-weight" value="0" step="0.1" oninput="calculateMeatTotals()" />
+            <input type="number" id="meat-avg-weight" value="0" step="0.1" inputmode="decimal" onfocus="this.select()" oninput="calculateMeatTotals()" />
           </div>
         </div>
 
@@ -117,11 +117,11 @@
         <div class="input-grid">
           <div class="input-group">
             <label>Daily Care Time (Minutes)</label>
-            <input type="number" id="meat-daily-time" value="0" oninput="calculateMeatTotals()" />
+            <input type="number" id="meat-daily-time" value="0" inputmode="decimal" onfocus="this.select()" oninput="calculateMeatTotals()" />
           </div>
           <div class="input-group">
             <label>Total Days in Batch</label>
-            <input type="number" id="meat-batch-days" value="0" oninput="calculateMeatTotals()" />
+            <input type="number" id="meat-batch-days" value="0" inputmode="decimal" onfocus="this.select()" oninput="calculateMeatTotals()" />
           </div>
         </div>
 
@@ -136,7 +136,7 @@
             <span id="meat-res-ongoing">$0.00</span>
           </div>
           <div class="result-item highlight-cash">
-            <span>Total Cash Needed Batch 1 (Setup + Batch):</span>
+            <span>Total Cash Needed Batch 1:</span>
             <span id="meat-res-batch1">$0.00</span>
           </div>
           <div class="result-item">
