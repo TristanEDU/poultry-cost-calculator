@@ -165,11 +165,11 @@ label {
 }
 
 input[type="number"] {
-  padding: 12px; /* Taller input for touch */
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px; /* 16px MINIMUM prevents iOS Safari Auto-Zooming */
-  min-height: 44px;
+  /* min-height: 25px; */
   background-color: #fcfcfc;
 }
 
