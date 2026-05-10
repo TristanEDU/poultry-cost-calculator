@@ -37,8 +37,22 @@ function generateCapitalHtml(items, prefix, callback) {
         <div class="calc-row">
             <div class="row-label">
                 ${item.name}
-                <button type="button" class="info-btn" popovertarget="${item.id}-pop">ⓘ</button>
-                <div popover id="${item.id}-pop" class="tooltip-popover">${item.tooltip}</div>
+                <button type="button" 
+                         class="info-btn" 
+                         aria-label="More information"
+                         popovertarget="${item.id}-pop"
+                         style="anchor-name: --btn-anchor-${item.id}"
+                         
+                         >
+                   ⓘ
+                 </button>
+                 <div popover 
+                      id="${item.id}-pop" 
+                      class="tooltip-popover"
+                      style="position-anchor: --btn-anchor-${item.id}"
+                      >
+                   ${item.tooltip}
+                 </div>
             </div>
             <div class="input-group">
                 <label>Estimated Cost ($)</label>

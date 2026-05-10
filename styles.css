@@ -75,6 +75,7 @@ h1 {
 }
 
 /* Cutting-Edge Popover Tooltips */
+
 .info-btn {
   background: none;
   border: none;
@@ -84,6 +85,7 @@ h1 {
   padding: 0 8px;
   margin-left: 4px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
 .tooltip-popover {
@@ -96,7 +98,14 @@ h1 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
   max-width: 300px;
   line-height: 1.4;
-  margin: auto; /* Centers popover natively */
+  inset: auto;
+  margin: 0; /*Centers popover natively*/
+  margin-bottom: 5px;
+  margin-left: 15px;
+  position-area: center x-end;
+
+  /* bottom: anchor(top); */
+  /* left: anchor(center); */
 }
 
 /* Adds a smooth fade-in for browsers that support it */
@@ -165,7 +174,7 @@ label {
 }
 
 input[type="number"] {
-  padding: 12px; 
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px; /* 16px MINIMUM prevents iOS Safari Auto-Zooming */
@@ -278,6 +287,12 @@ input[type="number"]:focus {
 /* =========================================
    MOBILE RESPONSIVE TWEAKS 
    ========================================= */
+@media (max-width: 920px) {
+  .tooltip-popover {
+    position-area: top span-all;
+  }
+}
+
 @media (max-width: 650px) {
   .calc-row {
     flex-direction: column; /* Stack the columns vertically on phones */
