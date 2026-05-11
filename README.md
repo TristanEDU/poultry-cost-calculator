@@ -295,12 +295,6 @@ Ideas, fixes, and improvements are welcome.
 
 ---
 
-## License
-
-MIT License
-
----
-
 ## Author
 
 Built by **Tristan**
