@@ -5,6 +5,10 @@
   --card-bg: #ffffff;
   --text-color: #333333;
   --border: #e0dcd3;
+  --dev-span-color: rgb(255, 230, 0);
+  --dev-span-style: italic;
+  --dev-span-weight: bold;
+  --dev-span-decor:underline;
 }
 
 body {
@@ -432,4 +436,11 @@ input[type="number"]:focus {
     margin-top: 20px !important;
     font-size: 12px !important;
   }
+}
+
+.dev-span {
+  color: var(--dev-span-color);
+  font-style: var(--dev-span-style);
+  font-weight: var(--dev-span-weight);
+  text-decoration: var(--dev-span-decor);
 }
