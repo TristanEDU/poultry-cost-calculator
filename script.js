@@ -1,31 +1,31 @@
 // --- Data & Tooltips ---
 const eggCapitalItems = [
-  { id: "e-cap-1", name: "Coop & Hardware", tooltip: "Costs vary widely. Use scrap wood/upcycled materials ($0-$50), build a basic DIY kit ($300), or buy a premium kit ($1,000+)." },
-  { id: "e-cap-2", name: "Fencing/Tractor", tooltip: "Basic wire and T-posts are cheap. Movable electric netting with a solar charger can cost $150-$300+." },
-  { id: "e-cap-3", name: "Feeders & Waterers", tooltip: "DIY buckets are cheap ($10). Heavy-duty galvanized or automatic systems cost more ($50-$100+)." },
-  { id: "e-cap-4", name: "Feed Storage (Bins)", tooltip: "Crucial for preventing rodents/moisture. A simple metal trash can ($30) or bulk bins ($150+)." },
+  { id: "e-cap-1", name: "Coop & Hardware", tooltip: "<span class='dev-span'>Placeholder Example:</span> Costs vary widely. Use scrap wood/upcycled materials ($0-$50), build a basic DIY kit ($300), or buy a premium kit ($1,000+)." },
+  { id: "e-cap-2", name: "Fencing/Tractor", tooltip: "<span class='dev-span'>Placeholder Example:</span> Basic wire and T-posts are cheap. Movable electric netting with a solar charger can cost $150-$300+." },
+  { id: "e-cap-3", name: "Feeders & Waterers", tooltip: "<span class='dev-span'>Placeholder Example:</span> DIY buckets are cheap ($10). Heavy-duty galvanized or automatic systems cost more ($50-$100+)." },
+  { id: "e-cap-4", name: "Feed Storage (Bins)", tooltip: "<span class='dev-span'>Placeholder Example:</span> Crucial for preventing rodents/moisture. A simple metal trash can ($30) or bulk bins ($150+)." },
 ];
 
 const eggOperatingItems = [
-  { id: "e-op-1", name: "Hens/Chicks Purchased" },
-  { id: "e-op-2", name: "Feed Bags (50lbs)" },
-  { id: "e-op-3", name: "Bedding/Pine Shavings" },
-  { id: "e-op-4", name: "Supplements (Grit/Oyster)" },
+  { id: "e-op-1", name: "Hens/Chicks Purchased", tooltip: "<span class='dev-span'>Placeholder Example:</span> Plan for your initial flock size. Average backyard flocks start with 4–8 birds." },
+  { id: "e-op-2", name: "Feed Bags (50lbs)", tooltip: "<span class='dev-span'>Placeholder Example:</span> A standard layer hen eats about 0.25 lbs of feed/day. For a flock of 6, this is roughly 11–12 bags (50lb) per year." },
+  { id: "e-op-3", name: "Bedding/Pine Shavings", tooltip: "<span class='dev-span'>Placeholder Example:</span> Using a 'Deep Bedding' approach, you might use 4–6 large compressed bags of shavings annually for a medium coop." },
+  { id: "e-op-4", name: "Supplements (Grit/Oyster)", tooltip: "<span class='dev-span'>Placeholder Example:</span> These are used sparingly; one bag of each often lasts a small flock a full year." },
 ];
 
 const meatCapitalItems = [
   { id: "m-cap-1", name: "Brooder Setup", tooltip: "Cardboard ring & heat lamp ($20) vs. premium brooder plates and draft-free enclosures ($100+)." },
-  { id: "m-cap-2", name: "Chicken Tractor", tooltip: "A PVC and chicken wire hoop house ($100) vs. heavy wood and hardware cloth Suscovich-style tractors ($300+)." },
-  { id: "m-cap-3", name: "Feeders & Waterers", tooltip: "Meat birds eat/drink a lot. Long trough feeders and bell waterers can run $50-$150." },
-  { id: "m-cap-4", name: "Processing Equipment", tooltip: "Knives and a traffic cone ($30) vs. buying a plucker and scalder ($500+). Renting equipment is a great option!" },
-  { id: "m-cap-5", name: "Feed Storage (Bins)", tooltip: "Crucial for preventing rodents/moisture. A simple metal trash can ($30) or bulk bins ($150+)." },
+  { id: "m-cap-2", name: "Chicken Tractor", tooltip: "<span class='dev-span'>Placeholder Example:</span> A PVC and chicken wire hoop house ($100) vs. heavy wood and hardware cloth Suscovich-style tractors ($300+)." },
+  { id: "m-cap-3", name: "Feeders & Waterers", tooltip: "<span class='dev-span'>Placeholder Example:</span> Meat birds eat/drink a lot. Long trough feeders and bell waterers can run $50-$150." },
+  { id: "m-cap-4", name: "Processing Equipment", tooltip: "<span class='dev-span'>Placeholder Example:</span> Knives and a traffic cone ($30) vs. buying a plucker and scalder ($500+). Renting equipment is a great option!" },
+  { id: "m-cap-5", name: "Feed Storage (Bins)", tooltip: "<span class='dev-span'>Placeholder Example:</span> Crucial for preventing rodents/moisture. A simple metal trash can ($30) or bulk bins ($150+)." },
 ];
 
 const meatOperatingItems = [
-  { id: "m-op-1", name: "Meat Chicks Purchased" },
-  { id: "m-op-2", name: "Feed Bags (50lbs)" },
-  { id: "m-op-3", name: "Bedding/Pine Shavings" },
-  { id: "m-op-4", name: "Processing Fees/Packaging" },
+  { id: "m-op-1", name: "Meat Chicks Purchased", tooltip: "<span class='dev-span'>Placeholder Example:</span> Common batches range from 15–30 birds for a standard chicken tractor." },
+  { id: "m-op-2", name: "Feed Bags (50lbs)", tooltip: "<span class='dev-span'>Placeholder Example:</span> Fast-growing broilers may consume 12–15 lbs of feed per bird to reach processing weight at 8 weeks." },
+  { id: "m-op-3", name: "Bedding/Pine Shavings", tooltip: "<span class='dev-span'>Placeholder Example:</span> Expect to use 1–2 bags of shavings per batch in a brooder or mobile tractor." },
+  { id: "m-op-4", name: "Processing Fees/Packaging", tooltip: "<span class='dev-span'>Placeholder Example:</span> Professional processing often costs $3–$7 per bird, while DIY shrink-wrap bags cost ~ $1.50 per bird." },
 ];
 
 // --- Generation Functions ---
@@ -69,7 +69,24 @@ function generateOperatingHtml(items, prefix, callback) {
     .map(
       (item) => `
         <div class="calc-row">
-            <div class="row-label">${item.name}</div>
+            <div class="row-label">${item.name}
+            <button type="button" 
+                         class="info-btn" 
+                         aria-label="More information"
+                         popovertarget="${item.id}-pop"
+                         style="anchor-name: --btn-anchor-${item.id}"
+                         
+                         >
+                   ⓘ
+                 </button>
+                 <div popover 
+                      id="${item.id}-pop" 
+                      class="tooltip-popover"
+                      style="position-anchor: --btn-anchor-${item.id}"
+                      >
+                   ${item.tooltip}
+                 </div>
+            </div>
             <div class="input-group">
                 <label>Quantity</label>
                 <input type="number" id="${item.id}-qty" value="0" min="0" inputmode="decimal" onfocus="this.select()" oninput="${callback}()">

@@ -64,10 +64,8 @@ Perfect for:
 
 ## Screenshots
 
-
 ![Calculator UI](./screenshots/main-ui.png)
 ![Print Worksheet](./screenshots/print-view.png)
-
 
 ---
 
@@ -121,6 +119,85 @@ Or with a local server:
 ```bash
 npx serve .
 ```
+
+---
+
+## Testing
+
+For development and testing purposes, you can use this browser console script to auto-fill all fields with sample data and trigger calculations:
+
+```js
+/**
+ * Auto-fill script for Poultry Cost Calculator Testing
+ * This script populates all input fields for both tabs and triggers calculations.
+ */
+(function autoFillPoultryCalculator() {
+  console.log("🚀 Starting auto-fill for testing...");
+
+  const testData = {
+    // --- Egg-Laying Tracker Inputs ---
+    "e-cap-1-cost": 350.0, // Coop & Hardware
+    "e-cap-2-cost": 120.0, // Fencing
+    "e-cap-3-cost": 45.0, // Feeders
+    "e-cap-4-cost": 30.0, // Storage
+
+    "e-op-1-qty": 6, // Hens
+    "e-op-1-price": 15.0,
+    "e-op-2-qty": 12, // Feed bags per year
+    "e-op-2-price": 22.0,
+    "e-op-3-qty": 4, // Bedding
+    "e-op-3-price": 8.0,
+    "e-op-4-qty": 2, // Supplements
+    "e-op-4-price": 12.0,
+
+    "egg-compost": 50.0, // Credits
+    "egg-production": 150, // Dozens
+    "egg-daily-time": 15, // Minutes
+
+    // --- Meat Bird Tracker Inputs ---
+    "m-cap-1-cost": 40.0, // Brooder
+    "m-cap-2-cost": 200.0, // Tractor
+    "m-cap-3-cost": 60.0, // Feeders
+    "m-cap-4-cost": 30.0, // Processing Gear
+    "m-cap-5-cost": 30.0, // Storage
+
+    "m-op-1-qty": 25, // Chicks
+    "m-op-1-price": 2.5,
+    "m-op-2-qty": 8, // Feed bags
+    "m-op-2-price": 25.0,
+    "m-op-3-qty": 3, // Bedding
+    "m-op-3-price": 8.0,
+    "m-op-4-qty": 25, // Processing fees
+    "m-op-4-price": 1.5,
+
+    "meat-compost": 20.0,
+    "meat-birds-count": 23, // Accounting for some mortality
+    "meat-avg-weight": 5.5,
+    "meat-daily-time": 20,
+    "meat-batch-days": 56, // 8 weeks
+  };
+
+  // Fill all fields defined in the testData object
+  Object.keys(testData).forEach((id) => {
+    const input = document.getElementById(id);
+    if (input) {
+      input.value = testData[id];
+      // Dispatch 'input' event to trigger the oninput attributes in your HTML
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    } else {
+      console.warn(`⚠️ Input with ID "${id}" not found.`);
+    }
+  });
+
+  // Explicitly call calculation functions from your script.js
+  if (typeof calculateEggTotals === "function") calculateEggTotals();
+  if (typeof calculateMeatTotals === "function") calculateMeatTotals();
+
+  console.log("✅ Auto-fill complete. Calculations updated.");
+})();
+```
+
+**Usage:** Copy the script above, open the calculator in your browser, open the Developer Console (F12), paste the script, and press Enter to auto-fill all fields with test data.
 
 ---
 
